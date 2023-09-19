@@ -122,6 +122,13 @@ class GetReportResponse():
             else:
                 df[column] = df[column].astype(str).str.strip().astype(str)
 
+        
+        if statement != "Demonstração das Mutações do Patrimônio Líquido":
+            if not self.previous_results:
+                # Get first column (most recent data available)
+                df = df.iloc[:, 0:3]
+                df.set_axis([*df.columns[:-1], 'Valor'], axis=1, inplace=True)
+                
         df["currency_unit"] = currency_unit
 
         return df

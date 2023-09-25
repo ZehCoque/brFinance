@@ -127,7 +127,7 @@ class GetReportResponse():
             if not self.previous_results:
                 # Get first column (most recent data available)
                 df = df.iloc[:, 0:3]
-                df.set_axis([*df.columns[:-1], 'Valor'], axis=1, inplace=True)
+                df.set_axis([*df.columns[:-1], 'Valor'], axis=1, copy=False)
                 
         df["currency_unit"] = currency_unit
 
@@ -278,6 +278,6 @@ class GetPesquisaCiaAbertaResponse():
             'CNPJ': 'cnpj',
             'CÓDIGO CVM': 'cod_cvm',
             'TIPO DE PARTICIPANTE': 'tipo_participante',
-            'SITUAÇÃO REGISTRO': 'situacao_registro'}, inplace=True)
+            'SITUAÇÃO REGISTRO': 'situacao_registro'}, copy=False)
 
         return cod_cvm_dataframe
